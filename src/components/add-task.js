@@ -6,65 +6,54 @@ import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles(theme => ({
-    button:{
-      marginTop : 20,
-      float : "right" 
+    button: {
+        marginTop: 20,
+        float: "right"
     },
-    textField:{
-        width : "100%",
-        marginLeft:5
+    textField: {
+        width: "100%",
+        marginLeft: 5
     }
-  }));
+}));
 
-function AddTask(){
+function AddTask(props) {
 
     const classes = useStyles();
-    const [values,setValues] = React.useState({
-      Task: '',
-    Title: '',
-    Button: false
-    });
+    console.log(props);
 
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
-        };
-    const onButtonClick=()=> {
-        setValues({ ...values, Button: true });
-        console.log(values);
-    };
     return (
         <div>
-            {values.Button? <div> 
+            {props.values.Button ? <div>
                 <form className={classes.container} noValidate autoComplete="off">
-                <TextField
-                    id="outlined-name"
-                    label="Title"
-                    className={classes.textField}
-                    value={values.name}
-                    onChange={handleChange('Title')}
-                    margin="normal"
-                    variant="outlined"
-                />
-                <TextField
-                    id="outlined-multiline-flexible"
-                    label="Task"
-                    multiline
-                    rowsMax="4"
-                    value={values.multiline}
-                    onChange={handleChange('Task')}
-                    className={classes.textField}
-                    margin="normal"
-                    variant="outlined"
-                />
+                    <TextField
+                        id="outlined-name"
+                        label="Title"
+                        className={classes.textField}
+                        value={props.values.title}
+                        onChange={props.handleChange('Title')}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                    <TextField
+                        id="outlined-multiline-flexible"
+                        label="Task"
+                        multiline
+                        rowsMax="4"
+                        value={props.values.description}
+                        onChange={props.handleChange('Task')}
+                        className={classes.textField}
+                        margin="normal"
+                        variant="outlined"
+                    />
                     <Button className={classes.button} variant="contained" color="primary" >Add</Button>
 
                 </form>
             </div>
-     :
-            <Button className={classes.button} variant="contained" onClick={onButtonClick} color="primary" >Add</Button>
-}
-                 </div>
-  
+                :
+                <Button className={classes.button} variant="contained" onClick={props.onButtonClick} color="primary" >Add</Button>
+            }
+        </div>
+
     )
 
 };
