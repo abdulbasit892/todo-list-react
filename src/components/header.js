@@ -7,23 +7,24 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles(theme => ({
-    title:{
-        flexGrow: 1,
-        paddingLeft:50,}
+  title: {
+    flexGrow: 1,
+    paddingLeft: 50,
+  }
 }));
-const Header = () =>{
-    const classes = useStyles();
+const Header = props => {
+  const classes = useStyles();
 
-    return(
-        <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            Todo-List
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" className={classes.title}>
+          Todo-List
           </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    );
+        <Button color="inherit" onClick={props.handleOpen}>Login</Button>
+      </Toolbar>
+    </AppBar>
+  );
 
 
 };

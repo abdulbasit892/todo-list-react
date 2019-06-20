@@ -6,6 +6,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import Icon from '@material-ui/core/Icon';
 import { makeStyles } from '@material-ui/core/styles';
+import firebase from "firebase";
+
 
 const useStyles = makeStyles(theme => ({
     heading: {
@@ -27,18 +29,24 @@ const useStyles = makeStyles(theme => ({
         margin: 10
     }
 }));
+const clicker = (uid) => {
+    console.log(uid);
+    firebase.auth().onAuthStateChanged((user) => {
+        firebase.database().ref('users/' + user.uid + "/task/" + uid).remove();
+    });
+
+};
 function TodoList(props) {
-
     const classes = useStyles();
+    const { uid } = props;
     const [expanded, setExpanded] = React.useState(false);
-
     const handleChange = panel => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
     return (
         <ExpansionPanel className={classes.card} expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
             <ExpansionPanelSummary
-                expandIcon={<Icon className={classes.icon}>check</Icon>}
+                expandIcon={<Icon onClick={() => { clicker(uid) }} className={classes.icon}>check</Icon>}
                 aria-controls="panel3bh-content"
                 id="panel3bh-header"
             >

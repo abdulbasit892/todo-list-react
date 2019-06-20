@@ -3,10 +3,16 @@ import Task from "./task";
 
 const taskList = props => {
     return (
-        props.data.map((task, index) => {
-            return <Task data={task} key={index} />
+        <div>
+            {props.data ? props.data.map((task, index) => {
+                return <Task data={task[1]} uid={task[0]} key={index} />
 
-        })
+            }) : <h1> No Tasks To Show</h1>}
+        </div>
+
+
+
+
     )
 };
 

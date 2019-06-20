@@ -19,33 +19,32 @@ const useStyles = makeStyles(theme => ({
 function AddTask(props) {
 
     const classes = useStyles();
-    console.log(props);
 
     return (
         <div>
-            {props.values.Button ? <div>
+            {props.Button ? <div>
                 <form className={classes.container} noValidate autoComplete="off">
                     <TextField
                         id="outlined-name"
                         label="Title"
                         className={classes.textField}
-                        value={props.values.title}
-                        onChange={props.handleChange('Title')}
+                        value={props.values.taskTitle}
+                        onChange={props.handleChange('taskTitle')}
                         margin="normal"
                         variant="outlined"
                     />
                     <TextField
                         id="outlined-multiline-flexible"
-                        label="Task"
+                        label="description"
                         multiline
                         rowsMax="4"
-                        value={props.values.description}
-                        onChange={props.handleChange('Task')}
+                        value={props.values.taskDescription}
+                        onChange={props.handleChange('taskDescription')}
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
                     />
-                    <Button className={classes.button} variant="contained" color="primary" >Add</Button>
+                    <Button className={classes.button} variant="contained" onClick={props.taskSubmitHandler} color="primary" >Add</Button>
 
                 </form>
             </div>
